@@ -1,8 +1,6 @@
 import User from '../models/user.js';
 import extend from 'lodash/extend.js';
-import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_temp');
 
 const create = async (req, res) => {
   try {
@@ -81,21 +79,6 @@ const remove = async (req, res) => {
   }
 };
 
-const stripeCustomer = async (req, res, next) => {
-  try {
-    let user = req.profile;
-    if (user.stripe_customer) {
-      return next();
-    }
-    const customer = await stripe.customers.create({
-      email: user.email,
-    });
-    user.stripe_customer = customer.id;
-    await user.save();
-    next();
-  } catch (error) {
-    return res.status(400).json({ error: error.message });
-  }
-};
 
-export default { create, userByID, read, list, remove, update, stripeCustomer };
+
+export default { create, userByID, read, list, remove, update};

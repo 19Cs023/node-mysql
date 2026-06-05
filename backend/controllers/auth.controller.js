@@ -17,7 +17,7 @@ const signin = async (req, res) => {
         _id: user.id, 
         name: user.name, 
         email: user.email,
-        is_shop_keeper: user.is_shop_keeper
+        role: user.role
       }
     });
   } catch (err) {

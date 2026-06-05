@@ -21,13 +21,6 @@ const User = sequelize.define('User', {
   salt: {
     type: DataTypes.STRING
   },
-  is_shop_keeper: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false
-  },
-  stripe_customer: {
-    type: DataTypes.STRING
-  },
   password: {
     type: DataTypes.VIRTUAL,
     set(val) {
